@@ -28,7 +28,7 @@ jobs:
       - name: Cache bust and current date
         run: |
           GIT_HASH=$(git rev-parse --short HEAD)
-          grep -rl '/assets/' . | xargs sed -i "s|/assets/|/assets-$GIT_HASH/|g"
+          grep -rl './assets/' . | xargs sed -i "s|./assets/|./assets-$GIT_HASH/|g"
           mv './assets' "./assets-${GIT_HASH}"
 
           CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")

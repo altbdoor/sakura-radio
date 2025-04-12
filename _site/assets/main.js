@@ -6,7 +6,9 @@ document.addEventListener("alpine:init", () => {
 
     return {
       async init() {
-        const radioData = await fetch("./radio.json").then((res) => res.json());
+        const radioData = await fetch("./assets/radio.json").then((res) =>
+          res.json(),
+        );
         this.$store.radioMap = { ...radioData };
 
         // init hash router
@@ -110,7 +112,6 @@ document.addEventListener("alpine:init", () => {
   }
 
   window.Alpine.store("radioMap", {});
-
   window.Alpine.data("root", root);
   window.Alpine.data("listen", listen);
 });

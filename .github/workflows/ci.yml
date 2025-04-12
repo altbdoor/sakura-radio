@@ -25,6 +25,18 @@ jobs:
       - uses: actions/configure-pages@v5
         id: pages
 
+      - name: Cache bust and current date
+        run: |
+          GIT_HASH=$(git rev-parse --short HEAD)
+          grep -rl '/assets/' . | xargs sed -i "s|/assets/|/assets-$foobar/|g"
+          mv './assets' "./assets-${GIT_HASH}"
+
+          CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          grep -rl 'CURRENT_DATE' . | xargs sed -i "s|CURRENT_DATE|$CURRENT_DATE|g"
+
+          find . -type f -name '*.d.ts' -delete
+        working-directory: "./_site"
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"

@@ -2,12 +2,17 @@ document.addEventListener("alpine:init", () => {
   const Hls = window.Hls;
 
   function root() {
-    this.$router.config({ mode: "hash" });
+    this.$router.config({ mode: "hash", base: location.pathname });
 
     return {
       async init() {
         const radioData = await fetch("./radio.json").then((res) => res.json());
         this.$store.radioMap = { ...radioData };
+
+        // init hash router
+        if (location.hash === "") {
+          this.$router.replace("/");
+        }
       },
     };
   }

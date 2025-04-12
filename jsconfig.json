@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "skipLibCheck": true,
+    "lib": ["ES2015", "DOM", "ES2017.Object"]
+  },
+  "include": ["_site/**/*.js", "_site/global.d.ts"]
+}

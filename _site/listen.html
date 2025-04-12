@@ -1,0 +1,51 @@
+<div x-data="listen" x-effect="onEffect($router.params.name, $store.radioMap)">
+  <style>
+    .listen__controls {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .listen__controls > button {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      flex: 1;
+    }
+
+    .listen__buttons--wide {
+      grid-column: span 2;
+    }
+  </style>
+
+  <h2>
+    <span x-text="$router.params.name"></span>
+    <em x-show="isLoading">(loading...)</em>
+  </h2>
+
+  <p>
+    <audio controls x-ref="player" @canplaythrough="isLoading = false"></audio>
+  </p>
+
+  <p class="listen__controls">
+    <button
+      type="button"
+      @click="$refs.player.play()"
+      class="listen__buttons listen__buttons--wide"
+    >
+      Play
+    </button>
+    <button
+      type="button"
+      @click="$refs.player.pause()"
+      class="listen__buttons listen__buttons--wide"
+    >
+      Pause
+    </button>
+
+    <button type="button" @click="changeVolume(0)">Mute</button>
+    <button type="button" @click="changeVolume(0.3)">30%</button>
+    <button type="button" @click="changeVolume(0.7)">70%</button>
+    <button type="button" @click="changeVolume(1)">100%</button>
+  </p>
+</div>

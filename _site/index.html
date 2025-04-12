@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>📻</text></svg>"
+    />
+
+    <title>le sakura radio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/normalize.css@5.0.0/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sakura.css@1.5.0/css/sakura-vader.css"
+    />
+    <style>
+      audio {
+        width: 100%;
+      }
+
+      .radio-options {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div x-data="root">
+      <h1>📻 le sakura radio</h1>
+      <ul class="radio-options">
+        <template x-for="(url, name) in $store.radioMap">
+          <li>
+            <button type="button" @click="$router.push('/listen/' + name)">
+              <span x-text="name"></span>
+            </button>
+          </li>
+        </template>
+
+        <li>
+          <button type="button" @click="$router.push('/about')">
+            About page
+          </button>
+        </li>
+      </ul>
+
+      <template x-route="/" x-template>
+        <h2>Choose a station to begin</h2>
+      </template>
+
+      <template
+        x-route="/listen/:name([A-Za-z0-9]+)"
+        template="./listen.html"
+      ></template>
+
+      <template x-route="/about" template="./about.html"></template>
+
+      <template x-route.notfound>
+        <div>
+          <h2>Error 404 route not found</h2>
+          <p>Go back to <a href="./">home</a></p>
+        </div>
+      </template>
+    </div>
+
+    <script src="./main.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/hls.js@1.6.2/dist/hls.light.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@shaun/alpinejs-router@1.3.1/dist/cdn.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+      defer
+    ></script>
+  </body>
+</html>

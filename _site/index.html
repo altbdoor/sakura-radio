@@ -62,7 +62,10 @@
       <template x-route="/about" template="./about.html"></template>
 
       <template x-route.notfound>
-        <div>
+        <div x-show="location.hash === ''">
+          <p>Loading...</p>
+        </div>
+        <div x-show="location.hash !== ''">
           <h2>Error 404 route not found</h2>
           <p>Go back to <a href="./">home</a></p>
         </div>
